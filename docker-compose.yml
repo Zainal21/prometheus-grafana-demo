@@ -3,7 +3,6 @@ services:
     image: prom/prometheus
     volumes:
       - "./prometheus.yml:/etc/prometheus/prometheus.yml"
-      - "./rules.yml:/etc/prometheus/rules.yml"
     networks:
       - localprom
     ports:
@@ -22,6 +21,14 @@ services:
   #     - localprom
   #   ports:
   #     - 9093:9093
+  grafana:
+    image: grafana/grafana
+    volumes:
+      - ./provisioning:/etc/grafana/provisioning
+    networks:
+      - localprom
+    ports:
+      - 3000:3000
 networks:
   localprom:
     driver: bridge
